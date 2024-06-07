@@ -1,0 +1,65 @@
+.space-top {
+    margin-top: 1em;
+}
+
+.space-top-lg {
+    margin-top: 5em;
+}
+
+/* Style the form */
+.multi-step-form {
+  width: 100%%;
+  min-width: 300px;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+textarea.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #027bff;
+}
+
+@keyframes shake {
+    0% { transform: translate(0px); }
+    20% { transform: translate(2px); }
+    40% { transform: translate(-2px); }
+    60% { transform: translate(2px); }
+    80% { transform: translate(-2px); }
+    100% { transform: translate(0px); }
+}
+
+.shake-on-error {
+    animation: shake 0.2s linear;
+}
+
+.edit {
+padding: 8px 0px 0px 5px;
+}

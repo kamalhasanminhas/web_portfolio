@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="resume-section p-3 p-lg-5 d-flex d-column" id="about" xmlns="http://www.w3.org/1999/html">
+    <div class="my-auto">
+        {%if user%}
+        <h1 class="mb-0">{{user.first_name}}<span class="text-primary">{{user.last_name}}</span></h1>
+        <h3>👨‍💻 {{user.job_title}}</h3>
+        <div class="subheading mb-5">
+            {{user.city}}, {{user.country}}
+        </div>
+        <p class='mb-2'>Welcome to my online portfolio!</p>
+        <p class='mb-2'>{{user.profile_summary}}</p>
+        {%else%}
+        <h1 class="mb-0">Welcome<span class="text-primary"></span></h1>
+        <p class='mb-2'>Please register and enter your details.</p>
+        {%endif%}
+        <ul class="list-inline list-social-icons mb-4">
+            {%if user.linked_in_url%}
+            <li class="list-inline-item">
+                <a href="{{user.linked_in_url}}" title="LinkedIn profile" rel="noopener" target="_blank">
+				<span class="fa-stack fa-lg">
+				  <i class="fa fa-circle fa-stack-2x"></i>
+				  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+				</span>
+                </a>
+            </li>
+            {%endif%}
+            {%if user.github_url%}
+            <li class="list-inline-item">
+                <a href="{{user.github_url}}" title="Github profile" rel="noopener" target="_blank">
+				<span class="fa-stack fa-lg">
+				  <i class="fa fa-circle fa-stack-2x"></i>
+				  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+				</span>
+                </a>
+            </li>
+            {%endif%}
+        </ul>
+    </div>
+</section>
+
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
+    <div class="my-auto">
+        <h2 class="mb-5">Experience</h2>
+        {%if user%}
+        {%for exp in user.experiences[0:3]%}
+        <div class="resume-item d-flex flex-column flex-md-row mb-5 resume-item-bdp border border-primary rounded">
+            <div class="resume-content mr-auto">
+                <div class="logo-title-company row align-items-center">
+                    <div class="col col-logo"><img class="align-middle"
+                                                   src="{{url_for('static',filename='img/%s'|format(exp.image))}}"
+                                                   width="66px"></div>
+                    <div class="col col-title-company">
+                        <div style="display:flex;"><h3 class="mb-0">{{exp.job_title}}</h3><a
+                                href="/experience?id={{exp.id}}"></a>
+                        </div>
+                        <div class="subheading mb-3">{{exp.company}}</div>
+                    </div>
+                </div>
+                <p>
+                    {{exp.description}}
+                </p>
+                {%if exp.achievement_list[0]%}
+                <ul>
+                    {%for ach in exp.achievement_list%}
+                    <li>{{ach}}</li>
+                    {%endfor%}
+                </ul>
+                {%endif%}
+                {%if exp.responsibilities_list[0]%}
+                <ul>
+                    {%for resp in exp.responsibilities_list%}
+                    <li>{{resp}}</li>
+                    {%endfor%}
+                </ul>
+                {%endif%}
+            </div>
+            <div class="resume-date text-md-right">
+                <span class="text-primary">{{exp.start_date}} - {{'Present' if exp.is_current==True else exp.end_date}}</span>
+            </div>
+        </div>
+        {%endfor%}
+        {%endif%}
+        {% if user%}
+        {%if user.experiences[3:] | length > 0%}
+        <div style="margin: auto; width: 100%; text-align: center;" id="loadMoreExp">
+            <a
+                    class="btn btn-secondary like-inline-icons mb-5" role="button" aria-expanded="false"
+                    id="buttonLoadMoreExp"><i class="fa fa-arrow-circle-down"></i> Load more experiences</a>
+        </div>
+        {%endif%}
+        {%endif%}
+        <div class="collapse" id="collapsePastExp">
+            {% if user%}
+            {%for exp in user.experiences[3:]%}
+            <div class="resume-item d-flex flex-column flex-md-row mb-5 resume-item-bdp border border-primary rounded">
+                <div class="resume-content mr-auto">
+                    <div class="logo-title-company row align-items-center">
+                        <div class="col col-logo"><img class="align-middle"
+                                                       src="{{url_for('static',filename='img/%s'|format(exp.image))}}"
+                                                       width="66px"></div>
+                        <div class="col col-title-company">
+                            <div style="display:flex;">
+                                <h3 class="mb-0">{{exp.job_title}}</h3>
+                            </div>
+                            <!--                            <div class="subheading mb-3">Zug, Switzerland (full remote)</div>-->
+                            <div class="subheading mb-3">{{exp.company}}</div>
+                        </div>
+                    </div>
+                    <p>
+                        {{exp.description}}
+                    </p>
+                    {%if exp.achievement_list[0]%}
+                    <ul>
+                        {%for ach in exp.achievement_list%}
+                        <li>{{ach}}</li>
+                        {%endfor%}
+                    </ul>
+                    {%endif%}
+                    {%if exp.responsibilities_list[0]%}
+                    <ul>
+                        {%for resp in exp.responsibilities_list%}
+                        <li>{{resp}}</li>
+                        {%endfor%}
+                    </ul>
+                    {%endif%}
+                </div>
+                <div class="resume-date text-md-right">
+                    <span class="text-primary">{{exp.start_date}} - {{'Present' if exp.is_current==True else exp.end_date}}</span>
+                </div>
+            </div>
+            {%endfor%}
+            {%endif%}
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="projects">
+    <div class="my-auto">
+        <h2 class="mb-5">Projects</h2>
+    </div>
+    <div id="carouselProjects" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {%for project in user.projects%}
+            <li data-target="#carouselProjects" data-slide-to="0" class="{{'active' if loop.index == 1 else ''}}"></li>
+            {%endfor%}
+        </ol>
+        <div class="carousel-inner">
+
+            {%for project in user.projects%}
+            <div class="carousel-item {{'active' if loop.index == 1 else ''}}">
+                <a href="{{project.project_url}}" target="_blank">
+                    <img class="d-block w-100" src="{{url_for('static', filename='img/%s'|format(project.image))}}" alt="iQAS logo">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h4 style="text-transform: none;">{{project.title}}</h4>
+                    <p style="color: black; margin-bottom: 0;">{{project.description|safe}}</p>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        <a class="carousel-control-prev" href="#carouselProjects" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselProjects" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</section>
+
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
+    <div class="my-auto">
+        <h2 class="mb-5">Skills</h2>
+        <div id="accordion">
+
+            {%for skill in user.skills%}
+            <div class="card">
+                <div class="card-header" id="headdevskills{{loop.index}}">
+                    <div style="display:flex;background:#1f497d;">
+                        <h3 class="mb-0" style="flex-grow: 1;">
+                            <a class="btn btn-primary active" role="button" data-toggle="collapse"
+                               data-target="#devskills{{loop.index}}" aria-expanded="true"
+                               aria-controls="devskills{{loop.index}}"
+                               aria-pressed="true">{{skill.name}}({{skill.proficiency}})</a>
+                        </h3>
+                    </div>
+                </div>
+                <div id="devskills{{loop.index}}" class="collapse {{'show' if loop.index == 1 else ''}}"
+                     aria-labelledby="headdevskills{{loop.index}}" data-parent="#accordion">
+                    <div class="card-body">
+                        <div>Years of Experience: {{skill.years_of_experience}}</div>
+                        {%if skill.details_list[0]%}
+                        <ul class="mb-0">
+                            {%for detail in skill.details_list%}
+                            <li>{{detail}}</li>
+                            {%endfor%}
+                        </ul>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</section>
+
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
+    <div class="my-auto">
+        <h2 class="mb-5">Education</h2>
+
+        {%for education in user.educations%}
+        <div class="resume-item d-flex flex-column flex-md-row mb-5 resume-item-bdp border border-primary rounded">
+            <div class="resume-content mr-auto">
+                <div class="logo-title-company row align-items-center">
+                    <div class="col col-logo"><img class="align-middle"
+                                                   src="{{url_for('static',filename='img/%s'|format(education.image))}}"
+                                                   alt=""
+                                                   width="66px"></div>
+                    <div class="col col-title-company">
+                        <div style="display:flex;">
+                            <h3 class="mb-0">{{education.institution}}</h3>
+                        </div>
+                        <div class="subheading mb-3">{{education.degree}}</div>
+                    </div>
+                </div>
+                {%if education.field_of_study%}
+                <p>Field of Study: <span style="font-style: italic;">{{education.field_of_study}}</span>
+                </p>
+                {%endif%}
+                {%if education.honors%}
+                <p>Honors: <span style="font-style: italic;">{{education.honors}}</span>
+                </p>
+                {%endif%}
+                {%if education.description_list[0]%}
+                {%for desc in education.description_list%}
+                <ul>
+                    <li>{{desc}}</li>
+                </ul>
+                {%endfor%}
+                {%endif%}
+            </div>
+            <div class="resume-date text-md-right">
+                <span class="text-primary">{{education.start_date.year}} - {{education.end_date.year}}</span>
+            </div>
+        </div>
+        {%endfor%}
+
+    </div>
+</section>
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="contact">
+    <div class="my-auto">
+        <h2 class="mb-5">Contact</h2>
+        <p class="mb-5">Interested in my profile? <br>Here are my contact details:</p>
+        <p class="mb-5"><i style="margin-right:1em;" class="fa fa-envelope"></i><a href="mailto:{{user.email}}">{{user.email}}</a><br><i
+                style="margin-right:1em;" class="fa fa-phone"></i>{{user.phone_number}}</p>
+    </div>
+</section>
+{%endblock%}

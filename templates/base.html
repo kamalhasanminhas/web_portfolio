@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Portfolio</title>
+    <link rel="manifest" href="manifest_en.json">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='css/condensed.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/open-sans.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/devicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/simple-line-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/flag-icon.min.css') }}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/resume.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body id="page-top">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <div class="btn-group" role="group" id="languageSelector">
+        {%if show_home_icon%}
+        <a href="/"><i style="color: white;" class="fa fa-home edit"></i></a>
+        {%endif%}
+        {%if not is_authenticated and show_login_icon%}
+        <a href="/login"><i style="color: white;" class="fa fa-sign-in edit"></i></a>
+        {% endif %}
+        {%if is_authenticated%}
+        <a href="/logout"><i style="color: white;" class="fa fa-sign-out edit"></i></a>
+        {%endif%}
+    </div>
+
+    <a class="navbar-brand js-scroll-trigger" href="#about">
+        <span class="d-none d-lg-block">
+		  <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ url_for('static', filename='img/%s'|format(user.image)) }}">
+		</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if show_menu %}
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#education">Education</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="container-fluid p-0">
+    {% block content %}
+    {% endblock %}
+</div>
+<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/easing.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/resume.min.js') }}"></script>
+<script src="{{url_for('static', filename='js/font-awesome.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>

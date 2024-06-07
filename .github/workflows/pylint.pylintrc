@@ -1,0 +1,21 @@
+[MASTER]
+# Enable or disable specific checks
+disable = missing-docstring, invalid-name, missing-module-docstring, missing-function-docstring
+
+# Set severity levels for specific checks
+enable = unused-import
+
+[MESSAGES CONTROL]
+
+# Customize the maximum line length
+max-line-length = 120
+
+[BASIC]
+
+# Customize naming conventions
+good-names = i, j, k, e
+
+[FORMAT]
+
+# Set the indentation style
+indent-string = "    "

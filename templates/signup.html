@@ -1,0 +1,70 @@
+{% block content %}
+<div>
+    <div class="container">
+        <form id="regForm" class="multi-step-form" method="POST" action="/signup" enctype="multipart/form-data">
+            <div class="tab">
+                <div class="form-group">
+                    <label for="email">Email address*</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username*</label>
+                    <input type="text" class="form-control" id="username" name="username" value="{{user.username}}" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password*</label>
+                    <input type="password" class="form-control" id="password" name="password" value="{{'*******' if user.password else ''}}" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="form-group">
+                    <label for="first_name">First Name*</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.first_name}}" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="first_name">Last Name*</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.last_name}}" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="job_title">Job Title*</label>
+                    <input type="text" class="form-control" id="job_title" name="job_title" value="{{user.job_title}}" placeholder="Job Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="profile_summary">Profile Summary</label>
+                    <textarea class="form-control" id="profile_summary" name="profile_summary" placeholder="Profile Summary">{{user.profile_summary}}</textarea>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="form-group">
+                    <label for="city">City*</label>
+                    <input type="text" class="form-control" id="city" name="city" value="{{user.city}}" placeholder="City" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country*</label>
+                    <input type="text" class="form-control" id="country" name="country" value="{{user.country}}" placeholder="Country" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">Phone Number*</label>
+                    <input type="text" class="form-control" id="phone_number" value="{{user.phone_number}}" name="phone_number" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control" id="image" accept="image/jpeg" name="image">
+                </div>
+            </div>
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button class="btn btn-secondary" type="button" id="prevBtnregForm" onclick="nextPrev(-1, 'regForm')">Previous</button>
+                    <button class="btn btn-primary" type="button" id="nextBtnregForm" onclick="nextPrev(1, 'regForm')">Next</button>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+            <input type="hidden" id="id" name="id" value="{{user.id}}">
+        </form>
+    </div>
+</div>
+{% endblock %}
