@@ -8,8 +8,6 @@ class Project(db.Model):  # type: ignore[name-defined]
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
-    project_type = db.Column(Enum('Professional', 'School'), nullable=False)
-    company = db.Column(db.String(255))
     start_date = db.Column(db.Date)
     end_date = db.Column(db.Date)
     technologies_used = db.Column(db.Text)

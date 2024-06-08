@@ -10,7 +10,7 @@
             {{user.city}}, {{user.country}}
         </div>
         <p class='mb-2'>Welcome to my online portfolio!</p>
-        <p class='mb-2'>{{user.profile_summary}}</p>
+        <p class='mb-2'>{{user.profile_summary|safe}}</p>
         {%else%}
         <h1 class="mb-0">Welcome<span class="text-primary"></span></h1>
         <p class='mb-2'>Please register and enter your details.</p>
@@ -59,22 +59,8 @@
                     </div>
                 </div>
                 <p>
-                    {{exp.description}}
+                    {{exp.description|safe}}
                 </p>
-                {%if exp.achievement_list[0]%}
-                <ul>
-                    {%for ach in exp.achievement_list%}
-                    <li>{{ach}}</li>
-                    {%endfor%}
-                </ul>
-                {%endif%}
-                {%if exp.responsibilities_list[0]%}
-                <ul>
-                    {%for resp in exp.responsibilities_list%}
-                    <li>{{resp}}</li>
-                    {%endfor%}
-                </ul>
-                {%endif%}
             </div>
             <div class="resume-date text-md-right">
                 <span class="text-primary">{{exp.start_date}} - {{'Present' if exp.is_current==True else exp.end_date}}</span>
@@ -111,20 +97,6 @@
                     <p>
                         {{exp.description}}
                     </p>
-                    {%if exp.achievement_list[0]%}
-                    <ul>
-                        {%for ach in exp.achievement_list%}
-                        <li>{{ach}}</li>
-                        {%endfor%}
-                    </ul>
-                    {%endif%}
-                    {%if exp.responsibilities_list[0]%}
-                    <ul>
-                        {%for resp in exp.responsibilities_list%}
-                        <li>{{resp}}</li>
-                        {%endfor%}
-                    </ul>
-                    {%endif%}
                 </div>
                 <div class="resume-date text-md-right">
                     <span class="text-primary">{{exp.start_date}} - {{'Present' if exp.is_current==True else exp.end_date}}</span>
@@ -187,14 +159,13 @@
                             <a class="btn btn-primary active" role="button" data-toggle="collapse"
                                data-target="#devskills{{loop.index}}" aria-expanded="true"
                                aria-controls="devskills{{loop.index}}"
-                               aria-pressed="true">{{skill.name}}({{skill.proficiency}})</a>
+                               aria-pressed="true">{{skill.name}}</a>
                         </h3>
                     </div>
                 </div>
                 <div id="devskills{{loop.index}}" class="collapse {{'show' if loop.index == 1 else ''}}"
                      aria-labelledby="headdevskills{{loop.index}}" data-parent="#accordion">
                     <div class="card-body">
-                        <div>Years of Experience: {{skill.years_of_experience}}</div>
                         {%if skill.details_list[0]%}
                         <ul class="mb-0">
                             {%for detail in skill.details_list%}
@@ -237,13 +208,7 @@
                 <p>Honors: <span style="font-style: italic;">{{education.honors}}</span>
                 </p>
                 {%endif%}
-                {%if education.description_list[0]%}
-                {%for desc in education.description_list%}
-                <ul>
-                    <li>{{desc}}</li>
-                </ul>
-                {%endfor%}
-                {%endif%}
+                {{education.description|safe}}
             </div>
             <div class="resume-date text-md-right">
                 <span class="text-primary">{{education.start_date.year}} - {{education.end_date.year}}</span>

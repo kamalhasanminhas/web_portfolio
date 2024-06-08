@@ -28,7 +28,8 @@ class LoginView(MethodView):
             show_home_icon=True,
             show_login_icon=False,
             show_menu=False,
-            form=LoginForm()
+            form=LoginForm(),
+            user=None
         )
 
     def post(self) -> typing.Union[str, Response]:

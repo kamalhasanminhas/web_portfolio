@@ -14,8 +14,3 @@ class Education(db.Model):  # type: ignore[name-defined]
     description = db.Column(db.Text)
     honors = db.Column(db.Text)
     image = db.Column(db.String(255))
-
-    @property
-    def description_list(self) -> typing.List[str]:
-        description_split: typing.List[str] = self.description.split('\n')
-        return description_split

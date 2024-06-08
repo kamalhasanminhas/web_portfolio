@@ -15,14 +15,32 @@ pip install -r requirements.txt
 python app.py -c
 ```
 
-You should see the admin page at after logging in at http://localhost/admin
+Home Page: http://localhost:5000
 
+You should see the admin page at after logging in at http://localhost:5000/admin
 
-### Dockerized Database
+### Create user
 
-TO Use Dockerized MySQL run the following command
+```shell
+flask user create
+```
+Output:
+```shell
+Username:
+Email:
+Password:
+First Name:
+Last Name:
+```
+
+### Docker
+
+To Use dockerized web app with mysql database please run the following command.
 ```shell
 docker-compose up -d
 ```
+
+Verify at `http://localhost`
+
 
 Note: Please make sure that Docker Desktop is installed and running

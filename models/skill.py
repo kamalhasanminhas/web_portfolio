@@ -9,8 +9,6 @@ class Skill(db.Model):  # type: ignore[name-defined]
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    proficiency = db.Column(Enum('Beginner', 'Intermediate', 'Advanced', 'Expert'), nullable=False)
-    years_of_experience = db.Column(db.Integer)
     details = db.Column(db.Text)
 
     @property
